@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "init": "yarn install && node init-types.js",
+    "start": "tsc -w"
+  },
+  "dependencies": {
+    "@hinny/core": "^0.0.3",
+    "@hinny/data-jdbc": "^0.0.3",
+    "@hinny/mvc": "^0.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
+}

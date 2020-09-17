@@ -1,0 +1,9 @@
+# .vscode/preview.yml
+autoOpen: true # 打开工作空间时是否自动开启所有应用的预览
+apps:
+  - port: 31080 # 应用的端口
+    run: java -jar ../app.jar --spring.config.location=./application.yml # 应用的启动命令
+    root: ./ # 应用的启动目录
+    name: HinnyApp # 应用名称
+    description: HinnyApp # 应用描述
+    autoOpen: true # 打开工作空间时是否自动开启预览（优先级高于根级 autoOpen）
