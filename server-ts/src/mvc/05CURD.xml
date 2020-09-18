@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.05CURD">
+    <select id="t01">
+        select * from hyb_orders
+        <where>
+            and create_at>'2020-09-10 14:32:39'
+            <if test="#obj.notEmpty(status)">
+                and status=#{status}
+            </if>
+            <if test="#obj.notEmpty(orderCode)">
+                and order_code=#{orderCode}
+            </if>
+            <if test="#obj.notEmpty(shipMobile)">
+                and ship_mobile=#{shipMobile}
+            </if>
+            <if test="#obj.notEmpty(orderType)">
+                and order_type=#{orderType}
+            </if>
+            <if test="#obj.notEmpty(payStatus)">
+                and pay_status=#{payStatus}
+            </if>
+        </where>
+    </select>
+
+    <select id="t04">
+        select * from hyb_orders
+        <where>
+            <if test="#obj.notEmpty(status)">
+                and status=#{status}
+            </if>
+            <if test="#obj.notEmpty(orderCode)">
+                and order_code=#{orderCode}
+            </if>
+            <if test="#obj.notEmpty(shipMobile)">
+                and ship_mobile=#{shipMobile}
+            </if>
+            <if test="#obj.notEmpty(orderType)">
+                and order_type=#{orderType}
+            </if>
+            <if test="#obj.notEmpty(payStatus)">
+                and pay_status=#{payStatus}
+            </if>
+        </where>
+    </select>
+</mapper>

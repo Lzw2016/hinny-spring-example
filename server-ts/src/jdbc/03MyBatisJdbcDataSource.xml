@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="01Base">
-    <select id="select-01">
-        select * from tb_order_detail_distinct
+<mapper namespace="jdbc.03MyBatisJdbcDataSource">
+    <select id="t01">
+        select * from hyb_orders
         <where>
-            <if test="#obj.notEmpty(storeNo)">
-                and store_no=#{storeNo}
+            <if test="#obj.notEmpty(payStatus)">
+                and pay_status=#{payStatus}
             </if>
             <if test="#obj.notEmpty(orderCodeList)">
                 and order_code in
@@ -13,7 +13,7 @@
                     #{code}
                 </foreach>
             </if>
+            and create_at>'2020-09-10 14:32:39'
         </where>
-        limit 10
     </select>
 </mapper>
