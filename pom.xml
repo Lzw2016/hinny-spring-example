@@ -82,7 +82,7 @@
             </dependency>
             <dependency>
                 <groupId>org.clever</groupId>
-                <artifactId>hinny-string-boot-starter</artifactId>
+                <artifactId>hinny-spring-boot-starter</artifactId>
                 <version>${hinny.version}</version>
             </dependency>
         </dependencies>
@@ -108,7 +108,7 @@
         </dependency>
         <dependency>
             <groupId>org.clever</groupId>
-            <artifactId>hinny-string-boot-starter</artifactId>
+            <artifactId>hinny-spring-boot-starter</artifactId>
         </dependency>
         <!--spring-->
         <dependency>
