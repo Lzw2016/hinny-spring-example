@@ -33,3 +33,4 @@ logs
 
 server-ts/node_modules
 server-ts/dist
+src/main/resources/server-ts

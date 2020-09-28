@@ -86,7 +86,7 @@ clever:
   hinny:
     script-path: 'server-ts'
     script-file-watcher:
-      enable-watcher: true
+      enable-watcher: false
       interval: 3s
       delay-millis: 300ms
       include:
