@@ -132,6 +132,40 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-server-ts</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/server-ts</directory>
+                                    <includes>
+                                        <include>**/*.js</include>
+                                        <include>**/*.json</include>
+                                        <include>**/*.xml</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>.vscode/**</exclude>
+                                        <exclude>node_modules/.bin/**</exclude>
+                                        <exclude>node_modules/@types/**</exclude>
+                                        <exclude>node_modules/typescript/**</exclude>
+                                        <exclude>init-types.js</exclude>
+                                        <exclude>**/tsconfig.json</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/src/main/resources/server-ts</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--spring-boot插件-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
