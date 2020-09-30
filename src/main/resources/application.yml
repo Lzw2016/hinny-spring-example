@@ -84,6 +84,7 @@ spring:
 ###################################################################################
 clever:
   hinny:
+    file-system-type: jar
     script-path: 'server-ts'
     script-file-watcher:
       enable-watcher: false
@@ -108,7 +109,8 @@ clever:
         - request-path: '/!/'
           script-path: '/dist'
     mybatis-mapper-config:
-      enable-watcher: true
-      mapper-path: 'server-ts/src'
+      enable-watcher: false
+      #mapper-path: 'server-ts/src'
+      mapper-path: 'classpath:server-ts/src/**/*.xml'
       interval: 1s
       include: [ '*.xml' ]
