@@ -84,10 +84,10 @@ spring:
 ###################################################################################
 clever:
   hinny:
-    file-system-type: jar
+    file-system-type: filesystem
     script-path: 'server-ts'
     script-file-watcher:
-      enable-watcher: false
+      enable-watcher: true
       interval: 3s
       delay-millis: 300ms
       include:
@@ -96,10 +96,10 @@ clever:
       exclude:
         - '*\node_modules\*'
     engine-instance-pool:
-      max-wait-millis: -1
-      min-idle: 2
-      max-idle: 8
-      max-total: 8
+      max-wait-millis: 1000
+      min-idle: 1
+      max-idle: 1
+      max-total: 1
     mvc-handler:
       support-suffix:
         - ''
@@ -109,8 +109,8 @@ clever:
         - request-path: '/!/'
           script-path: '/dist'
     mybatis-mapper-config:
-      enable-watcher: false
-      #mapper-path: 'server-ts/src'
-      mapper-path: 'classpath:server-ts/src/**/*.xml'
+      enable-watcher: true
+      mapper-path: 'server-ts/src'
+      #mapper-path: 'classpath:server-ts/src/**/*.xml'
       interval: 1s
       include: [ '*.xml' ]
