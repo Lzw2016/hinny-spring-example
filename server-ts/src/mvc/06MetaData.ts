@@ -1,6 +1,5 @@
 import {HttpRouter, MediaType} from "@hinny/mvc";
-import {mateDataManage} from "@hinny/meta-data";
-import {TableSchema} from "@hinny/meta-data/dist/model/TableSchema";
+import {mateDataManage, TableColumn, TableSchema} from "@hinny/meta-data";
 import {stringUtils} from "@hinny/core";
 
 const mateDataService = mateDataManage.getDefault();
@@ -8,14 +7,48 @@ if (mateDataService.getDataBaseSummaryList().isEmpty()) {
     mateDataService.reload();
 }
 
+const getInterfaceName = function (tableSchema: TableSchema) {
+    return stringUtils.underlineToCamel(tableSchema.getTableName(), true);
+}
+
+const getFieldComment = function (column: TableColumn) {
+    return stringUtils.trim(column.getComment());
+}
+
+const getFieldName = function (column: TableColumn) {
+    return stringUtils.underlineToCamel(column.getColumnName());
+}
+
+const FieldTypeMapper: { [name in JString]: JString } = {
+    "java.lang.Byte": "JByte",
+    "java.lang.Short": "JShort",
+    "java.lang.Integer": "JInt",
+    "java.lang.Long": "JLong",
+    "java.lang.Float": "JFloat",
+    "java.lang.Double": "JDouble",
+    "java.lang.Boolean": "JBoolean",
+    "java.lang.Char": "JChar",
+    "java.lang.String": "JString",
+    "java.math.BigDecimal": "JBigDecimal",
+    "java.math.BigInteger": "JBigInteger",
+    "java.util.Date": "JSqlDate",
+    "java.sql.Date": "JSqlDate",
+    "java.sql.Time": "JSqlTime",
+    "java.sql.Timestamp": "JSqlTimestamp",
+}
+
+const getFieldType = function (column: TableColumn) {
+    return FieldTypeMapper[column.getMappedClass().getName()] ?? column.getMappedClass().getName();
+}
+
 const getInterfaceCode = function (tableSchema: TableSchema): JString {
     const columnList = tableSchema.getColumnList();
     const codeArray: JString[] = [];
-    codeArray.push(`interface ${tableSchema.getTableName()} {`);
+    codeArray.push(`interface ${getInterfaceName(tableSchema)} {`);
     for (let i = 0; i < columnList.size(); i++) {
         const column = columnList.get(i);
-        codeArray.push(`    /** ${column.getComment()} */`);
-        codeArray.push(`    ${column.getColumnName()}: ${column.getMappedClass().getSimpleName()};`);
+        codeArray.push(`    /** ${getFieldComment(column)} */`);
+        codeArray.push(`    ${getFieldName(column)}: ${getFieldType(column)};`);
     }
     codeArray.push(`}`);
     return codeArray.join("\n");
@@ -38,7 +71,7 @@ const t02: HttpRouter = {
                 const tableSchema = tableList.get(j);
                 const code = getInterfaceCode(tableSchema);
                 codeArray.push(stringUtils.trim(code));
-                codeArray.push("\n\n");
+                codeArray.push("");
             }
         }
         const {response} = ctx;

@@ -2,20 +2,25 @@
 # yarn lockfile v1
 
 
-"@hinny/core@0.0.3", "@hinny/core@^0.0.3":
+"@hinny/core@0.0.3":
   version "0.0.3"
   resolved "https://registry.npmjs.org/@hinny/core/-/core-0.0.3.tgz#b6483b3b0c9e747d5376496d0c5178b570d73071"
   integrity sha512-H2bbXWenG6ceTO5rwh4riNFW2Qagr9pnEbigLleM6v+FE4OCCekex45rFbjWbpUb3Iiwxn2Qk6x0/Kel4IfLyQ==
+
+"@hinny/core@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.npmjs.org/@hinny/core/-/core-0.0.6.tgz#6a7ac65e8214acb2c65f6eb0482ae2ed28fb92db"
+  integrity sha512-RYcjQzu+uCzMuAhdOtxZHRTjnXYvOQvuPR83USysrw/qDKzaQGoM3w4+m4W+JQ230dEqpI+GL1ERfsZbZIE81A==
 
 "@hinny/data-jdbc@^0.0.3":
   version "0.0.3"
   resolved "https://registry.npmjs.org/@hinny/data-jdbc/-/data-jdbc-0.0.3.tgz#b7ad48ca18a8c9b5093c0729629fa72266767458"
   integrity sha512-rBdPqxZGvQ5Lx1HNLLx8kd8BfwRTD31vf/jDwQrU6kH6vuJHMpQ1gQr6lzc6+krCPcZsLe4ZVre2nK0s2VTWig==
 
-"@hinny/meta-data@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/@hinny/meta-data/-/meta-data-0.0.3.tgz#8786d65dcadc26604bf02b361ba8844f95775f3c"
-  integrity sha512-7HHyhSIgkM9iTOL2dDyt2N53J2YiGup5yF33I/1dVsDG4qeze0Lry/LwJe5qNWUut6ZdmcrFyMVARHCbXDp41Q==
+"@hinny/meta-data@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/@hinny/meta-data/-/meta-data-0.0.4.tgz#63a90bdb388c580f7900e97f4fc35940d03ed5f0"
+  integrity sha512-FXaNzlaPuCy8y0Gxy6DG7nQnPtabLUMZKHty3AExEJGO9YUXGiqayagi0uHCR/xxaquSqQ2S/TPODgqxsMwEqQ==
 
 "@hinny/mvc@^0.0.3":
   version "0.0.3"
