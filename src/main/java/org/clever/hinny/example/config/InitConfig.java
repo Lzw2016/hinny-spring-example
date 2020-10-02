@@ -6,6 +6,7 @@ import org.clever.hinny.data.jdbc.MyBatisJdbcDataSource;
 import org.clever.hinny.data.jdbc.mybatis.MyBatisMapperSql;
 import org.clever.hinny.graal.data.jdbc.JdbcDatabase;
 import org.clever.hinny.graal.data.jdbc.MyBatisJdbcDatabase;
+import org.clever.hinny.graal.meta.data.MateDataManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -46,9 +47,12 @@ public class InitConfig implements CommandLineRunner {
 
                     MyBatisJdbcDataSource mybatisDS = new MyBatisJdbcDataSource(ds, myBatisMapperSql);
                     MyBatisJdbcDatabase.Instance.setDefault("default", mybatisDS);
+
+                    MateDataManage.Instance.setDefault("default", dataSource);
                     continue;
                 }
                 JdbcDatabase.Instance.add("jdbc-" + i, new JdbcDataSource(dataSource));
+                MateDataManage.Instance.add("jdbc-" + i, dataSource);
             }
         }
         log.info("初始化完成");

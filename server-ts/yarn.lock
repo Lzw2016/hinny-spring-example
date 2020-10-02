@@ -12,6 +12,11 @@
   resolved "https://registry.npmjs.org/@hinny/data-jdbc/-/data-jdbc-0.0.3.tgz#b7ad48ca18a8c9b5093c0729629fa72266767458"
   integrity sha512-rBdPqxZGvQ5Lx1HNLLx8kd8BfwRTD31vf/jDwQrU6kH6vuJHMpQ1gQr6lzc6+krCPcZsLe4ZVre2nK0s2VTWig==
 
+"@hinny/meta-data@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/@hinny/meta-data/-/meta-data-0.0.3.tgz#8786d65dcadc26604bf02b361ba8844f95775f3c"
+  integrity sha512-7HHyhSIgkM9iTOL2dDyt2N53J2YiGup5yF33I/1dVsDG4qeze0Lry/LwJe5qNWUut6ZdmcrFyMVARHCbXDp41Q==
+
 "@hinny/mvc@^0.0.3":
   version "0.0.3"
   resolved "https://registry.npmjs.org/@hinny/mvc/-/mvc-0.0.3.tgz#17c89d3fb67186463c0cd8e1e879a3e4ba8f3b0a"
