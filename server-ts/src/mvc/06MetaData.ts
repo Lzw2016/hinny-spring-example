@@ -7,18 +7,34 @@ if (mateDataService.getDataBaseSummaryList().isEmpty()) {
     mateDataService.reload();
 }
 
-const getInterfaceName = function (tableSchema: TableSchema) {
+// 获取表注释
+const getTableComment = function (tableSchema: TableSchema) {
+    let comment = stringUtils.trim(tableSchema.getDescription());
+    if (stringUtils.isBlank(comment)) {
+        comment = tableSchema.getAttributes().get("TABLE_COMMENT");
+    }
+    if (stringUtils.isBlank(comment)) {
+        comment = "";
+    }
+    return comment;
+}
+
+// 获取表名称
+const getTableName = function (tableSchema: TableSchema) {
     return stringUtils.underlineToCamel(tableSchema.getTableName(), true);
 }
 
+// 获取字段注释
 const getFieldComment = function (column: TableColumn) {
     return stringUtils.trim(column.getComment());
 }
 
+// 获取字段名称
 const getFieldName = function (column: TableColumn) {
     return stringUtils.underlineToCamel(column.getColumnName());
 }
 
+// 字段类型映射
 const FieldTypeMapper: { [name in JString]: JString } = {
     "java.lang.Byte": "JByte",
     "java.lang.Short": "JShort",
@@ -37,20 +53,66 @@ const FieldTypeMapper: { [name in JString]: JString } = {
     "java.sql.Timestamp": "JSqlTimestamp",
 }
 
+// 获取字段类型
 const getFieldType = function (column: TableColumn) {
     return FieldTypeMapper[column.getMappedClass().getName()] ?? column.getMappedClass().getName();
 }
 
+// 获取 TS interface 代码
 const getInterfaceCode = function (tableSchema: TableSchema): JString {
     const columnList = tableSchema.getColumnList();
     const codeArray: JString[] = [];
-    codeArray.push(`interface ${getInterfaceName(tableSchema)} {`);
+    codeArray.push(`/** ${getTableComment(tableSchema)} */`);
+    codeArray.push(`interface ${getTableName(tableSchema)} {`);
     for (let i = 0; i < columnList.size(); i++) {
         const column = columnList.get(i);
         codeArray.push(`    /** ${getFieldComment(column)} */`);
         codeArray.push(`    ${getFieldName(column)}: ${getFieldType(column)};`);
     }
     codeArray.push(`}`);
+    return codeArray.join("\n");
+}
+
+// 生成 interface 代码
+const generateInterfaceCode = function (): JString {
+    const codeArray: JString[] = [];
+    const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
+    for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
+        const dataBaseSummary = dataBaseSummaryJList.get(i);
+        if (stringUtils.equals("information_schema", dataBaseSummary.getSchemaName())) {
+            continue;
+        }
+        const tableList = dataBaseSummary.getTableList()
+        for (let j = 0; j < tableList.size(); j++) {
+            const tableSchema = tableList.get(j);
+            const code = getInterfaceCode(tableSchema);
+            codeArray.push(stringUtils.trim(code));
+            codeArray.push("");
+        }
+    }
+    return codeArray.join("\n");
+}
+
+// 生成表名称变量
+const generateTableName = function (): JString {
+    const codeArray: JString[] = [];
+    const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
+    for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
+        const dataBaseSummary = dataBaseSummaryJList.get(i);
+        if (stringUtils.equals("information_schema", dataBaseSummary.getSchemaName())) {
+            continue;
+        }
+        const dbName = dataBaseSummary.getSchemaName().replace("-", "_");
+        codeArray.push(`const ${stringUtils.underlineToCamel(dbName)} = {`);
+        const tableList = dataBaseSummary.getTableList()
+        for (let j = 0; j < tableList.size(); j++) {
+            const tableSchema = tableList.get(j);
+            codeArray.push(`    /** ${getTableComment(tableSchema)} */`);
+            codeArray.push(`    ${stringUtils.underlineToCamel(tableSchema.getTableName())}: "${tableSchema.getTableName()}",`);
+        }
+        codeArray.push(`}`);
+        codeArray.push("");
+    }
     return codeArray.join("\n");
 }
 
@@ -62,25 +124,24 @@ const t01: HttpRouter = {
 
 const t02: HttpRouter = {
     get: ctx => {
-        const codeArray: JString[] = [];
-        const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
-        for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
-            const dataBaseSummary = dataBaseSummaryJList.get(i);
-            const tableList = dataBaseSummary.getTableList()
-            for (let j = 0; j < tableList.size(); j++) {
-                const tableSchema = tableList.get(j);
-                const code = getInterfaceCode(tableSchema);
-                codeArray.push(stringUtils.trim(code));
-                codeArray.push("");
-            }
-        }
+        const code = generateInterfaceCode();
         const {response} = ctx;
         response.setContentType(MediaType.Plain);
-        response.getWriter().print(codeArray.join("\n"));
+        response.getWriter().print(code);
+    },
+}
+
+const t03: HttpRouter = {
+    get: ctx => {
+        const code = generateTableName();
+        const {response} = ctx;
+        response.setContentType(MediaType.Plain);
+        response.getWriter().print(code);
     },
 }
 
 export {
     t01,
     t02,
+    t03,
 }
