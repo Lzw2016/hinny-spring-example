@@ -63,8 +63,8 @@ spring:
   datasource: #----------------------------------------------------------- 数据库配置
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:mysql://192.168.31.40:3306/clever-template
-    url: jdbc:mysql://mysql.msvc.top:3306/clever-template
+    url: jdbc:mysql://192.168.31.40:3306/clever-template
+    #url: jdbc:mysql://mysql.msvc.top:3306/clever-template
     username: clever-template
     password: lizhiwei1993
     hikari:
@@ -77,8 +77,8 @@ spring:
         useSSL: false
         useCursorFetch: true
       auto-commit: false
-      maximum-pool-size: 100
-      minimum-idle: 5
+      maximum-pool-size: 1
+      minimum-idle: 1
       max-lifetime: 1800000
       connection-test-query: SELECT 1
 
@@ -117,3 +117,26 @@ clever:
       #mapper-path: 'classpath:server-ts/src/**/*.xml'
       interval: 1s
       include: [ '*.xml' ]
+    multiple-jdbc:
+      default-name: default
+      global-config:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        data-source-properties:
+          serverTimezone: GMT+8
+          useUnicode: true
+          characterEncoding: utf-8
+          zeroDateTimeBehavior: convert_to_null
+          useSSL: false
+          useCursorFetch: true
+        auto-commit: false
+        maximum-pool-size: 100
+        minimum-idle: 5
+        max-lifetime: 1800000
+        connection-test-query: SELECT 1
+      jdbc-map:
+        default:
+          jdbc-url: jdbc:mysql://192.168.31.40:3306/clever-template
+          #jdbc-url: jdbc:mysql://mysql.msvc.top:3306/clever-template
+          username: clever-template
+          password: lizhiwei1993
+

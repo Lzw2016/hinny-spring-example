@@ -12,7 +12,10 @@ import java.util.TimeZone;
  * 创建时间：2020/08/28 20:28 <br/>
  */
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"org.clever"})
+@SpringBootApplication(
+        scanBasePackages = {"org.clever"}
+        // exclude = {DataSourceAutoConfiguration.class}
+)
 public class StartApp {
 
     public static void main(String[] args) {
