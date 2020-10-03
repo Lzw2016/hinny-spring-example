@@ -63,7 +63,7 @@ const getInterfaceCode = function (tableSchema: TableSchema): JString {
     const columnList = tableSchema.getColumnList();
     const codeArray: JString[] = [];
     codeArray.push(`/** ${getTableComment(tableSchema)} */`);
-    codeArray.push(`interface ${getTableName(tableSchema)} {`);
+    codeArray.push(`export interface ${getTableName(tableSchema)} {`);
     for (let i = 0; i < columnList.size(); i++) {
         const column = columnList.get(i);
         codeArray.push(`    /** ${getFieldComment(column)} */`);
@@ -103,7 +103,7 @@ const generateTableName = function (): JString {
             continue;
         }
         const dbName = dataBaseSummary.getSchemaName().replace("-", "_");
-        codeArray.push(`const ${stringUtils.underlineToCamel(dbName)} = {`);
+        codeArray.push(`export const ${stringUtils.underlineToCamel(dbName)} = {`);
         const tableList = dataBaseSummary.getTableList()
         for (let j = 0; j < tableList.size(); j++) {
             const tableSchema = tableList.get(j);

@@ -1,20 +1,5 @@
-const cleverTemplate = {
-    /** 订单表 */
-    hybOrders: "hyb_orders",
-    /** 订单明细表 */
-    hybOrdersItems: "hyb_orders_items",
-    /** 权限表 */
-    permission: "permission",
-    /** 订单去重明细表 */
-    tbOrderDetailDistinct: "tb_order_detail_distinct",
-    /** 订单主表 */
-    tbOrderMain: "tb_order_main",
-    /**  */
-    test: "test",
-}
-
 /** 订单表 */
-interface HybOrders {
+export interface HybOrders {
     /** 订单ID */
     orderId: JLong;
     /** 订单编号 */
@@ -138,7 +123,7 @@ interface HybOrders {
 }
 
 /** 订单明细表 */
-interface HybOrdersItems {
+export interface HybOrdersItems {
     /** 订单明细id */
     orderItemId: JLong;
     /** 订单ID */
@@ -226,7 +211,7 @@ interface HybOrdersItems {
 }
 
 /** 权限表 */
-interface Permission {
+export interface Permission {
     /** 主键id */
     id: JLong;
     /** 系统(或服务)名称 */
@@ -246,7 +231,7 @@ interface Permission {
 }
 
 /** 订单去重明细表 */
-interface TbOrderDetailDistinct {
+export interface TbOrderDetailDistinct {
     /** 主键id */
     id: JLong;
     /** 店铺编号 */
@@ -298,7 +283,7 @@ interface TbOrderDetailDistinct {
 }
 
 /** 订单主表 */
-interface TbOrderMain {
+export interface TbOrderMain {
     /** 订单id */
     orderId: JLong;
     /** user_agent_id */
@@ -422,7 +407,7 @@ interface TbOrderMain {
 }
 
 /**  */
-interface Test {
+export interface Test {
     /**  */
     id: JLong;
     /**  */
@@ -435,4 +420,19 @@ interface Test {
     date: JSqlDate;
     /**  */
     year: JSqlDate;
+}
+
+export const cleverTemplate = {
+    /** 订单表 */
+    hybOrders: "hyb_orders",
+    /** 订单明细表 */
+    hybOrdersItems: "hyb_orders_items",
+    /** 权限表 */
+    permission: "permission",
+    /** 订单去重明细表 */
+    tbOrderDetailDistinct: "tb_order_detail_distinct",
+    /** 订单主表 */
+    tbOrderMain: "tb_order_main",
+    /**  */
+    test: "test",
 }
