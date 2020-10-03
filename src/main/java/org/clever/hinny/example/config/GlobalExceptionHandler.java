@@ -32,7 +32,6 @@ import java.util.Set;
  * 作者：lzw <br/>
  * 创建时间：2017-09-03 11:55 <br/>
  */
-@SuppressWarnings("Duplicates")
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
