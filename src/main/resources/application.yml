@@ -90,14 +90,14 @@ clever:
     file-system-type: filesystem
     script-path: 'server-ts'
     script-file-watcher:
-      enable-watcher: true
-      interval: 3s
-      delay-millis: 300ms
       include:
         - '*.js'
         - '*.json'
       exclude:
         - '*\node_modules\*'
+      enable-watcher: true
+      interval: 3s
+      delay-millis: 300ms
     engine-instance-pool:
       max-wait-millis: 1000
       min-idle: 1
@@ -112,9 +112,9 @@ clever:
         - request-path: '/!/'
           script-path: '/dist'
     mybatis-mapper-config:
-      enable-watcher: true
       mapper-path: 'server-ts/src'
       #mapper-path: 'classpath:server-ts/src/**/*.xml'
+      enable-watcher: true
       interval: 1s
       include: [ '*.xml' ]
     multiple-jdbc:
