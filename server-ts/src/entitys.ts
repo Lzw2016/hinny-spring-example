@@ -1,3 +1,18 @@
+export const cleverTemplate = {
+    /** 订单表 */
+    HybOrders: "hyb_orders",
+    /** 订单明细表 */
+    HybOrdersItems: "hyb_orders_items",
+    /** 权限表 */
+    Permission: "permission",
+    /** 订单去重明细表 */
+    TbOrderDetailDistinct: "tb_order_detail_distinct",
+    /** 订单主表 */
+    TbOrderMain: "tb_order_main",
+    /**  */
+    Test: "test",
+}
+
 /** 订单表 */
 export interface HybOrders {
     /** 订单ID */
@@ -420,19 +435,4 @@ export interface Test {
     date: JSqlDate;
     /**  */
     year: JSqlDate;
-}
-
-export const cleverTemplate = {
-    /** 订单表 */
-    hybOrders: "hyb_orders",
-    /** 订单明细表 */
-    hybOrdersItems: "hyb_orders_items",
-    /** 权限表 */
-    permission: "permission",
-    /** 订单去重明细表 */
-    tbOrderDetailDistinct: "tb_order_detail_distinct",
-    /** 订单主表 */
-    tbOrderMain: "tb_order_main",
-    /**  */
-    test: "test",
 }

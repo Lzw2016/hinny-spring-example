@@ -1,6 +1,6 @@
 import {TableSchema} from "@hinny/meta-data";
 import {stringUtils} from "@hinny/core";
-import {getTableComment, mateDataService} from "./00Common";
+import {getTableComment, mateDataService, systemSchema} from "./00Common";
 import {HttpRouter, MediaType} from "@hinny/mvc";
 
 /** 获取表文档 */
@@ -30,7 +30,7 @@ const generateMarkdownDoc = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equals("information_schema", dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equals(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
             continue;
         }
         const tableList = dataBaseSummary.getTableList()

@@ -1,10 +1,21 @@
 import {mateDataManage, TableColumn, TableSchema} from "@hinny/meta-data";
 import {stringUtils} from "@hinny/core";
+import {DataBaseSummary} from "@hinny/meta-data/model/DataBaseSummary";
 
 // 初始化数据库元数据
 const mateDataService = mateDataManage.getDefault();
 if (mateDataService.getDataBaseSummaryList().isEmpty()) {
     mateDataService.reload();
+}
+
+const systemSchema = {
+    informationSchema: "information_schema",
+};
+
+/** 获取数据库名称 */
+const getDataBaseName = function (dataBaseSummary: DataBaseSummary): JString {
+    const dbName = dataBaseSummary.getSchemaName().replace("-", "_");
+    return stringUtils.underlineToCamel(stringUtils.lowerCase(dbName));
 }
 
 /** 获取表注释 */
@@ -21,7 +32,7 @@ const getTableComment = function (tableSchema: TableSchema) {
 
 /** 获取表名称 */
 const getTableName = function (tableSchema: TableSchema) {
-    return stringUtils.underlineToCamel(tableSchema.getTableName(), true);
+    return stringUtils.underlineToCamel(stringUtils.lowerCase(tableSchema.getTableName()), true);
 }
 
 /** 获取字段注释 */
@@ -31,7 +42,7 @@ const getFieldComment = function (column: TableColumn) {
 
 /** 获取字段名称 */
 const getFieldName = function (column: TableColumn) {
-    return stringUtils.underlineToCamel(column.getColumnName());
+    return stringUtils.underlineToCamel(stringUtils.lowerCase(column.getColumnName()));
 }
 
 /** 字段类型映射 */
@@ -60,6 +71,8 @@ const getFieldType = function (column: TableColumn) {
 
 export {
     mateDataService,
+    systemSchema,
+    getDataBaseName,
     getTableComment,
     getTableName,
     getFieldComment,

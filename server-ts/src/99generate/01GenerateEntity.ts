@@ -1,7 +1,7 @@
 import {HttpRouter, MediaType} from "@hinny/mvc";
 import {TableSchema} from "@hinny/meta-data";
 import {stringUtils} from "@hinny/core";
-import {getFieldComment, getFieldName, getFieldType, getTableComment, getTableName, mateDataService} from "./00Common";
+import {getDataBaseName, getFieldComment, getFieldName, getFieldType, getTableComment, getTableName, mateDataService, systemSchema} from "./00Common";
 
 /** 生成表名称变量 */
 const generateTableName = function (): JString {
@@ -9,16 +9,15 @@ const generateTableName = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equals("information_schema", dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
             continue;
         }
-        const dbName = dataBaseSummary.getSchemaName().replace("-", "_");
-        codeArray.push(`export const ${stringUtils.underlineToCamel(dbName)} = {`);
+        codeArray.push(`export const ${getDataBaseName(dataBaseSummary)} = {`);
         const tableList = dataBaseSummary.getTableList()
         for (let j = 0; j < tableList.size(); j++) {
             const tableSchema = tableList.get(j);
             codeArray.push(`    /** ${getTableComment(tableSchema)} */`);
-            codeArray.push(`    ${stringUtils.underlineToCamel(tableSchema.getTableName())}: "${tableSchema.getTableName()}",`);
+            codeArray.push(`    ${getTableName(tableSchema)}: "${tableSchema.getTableName()}",`);
         }
         codeArray.push(`}`);
         codeArray.push("");
@@ -47,7 +46,7 @@ const generateInterfaceCode = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equals("information_schema", dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
             continue;
         }
         const tableList = dataBaseSummary.getTableList()
