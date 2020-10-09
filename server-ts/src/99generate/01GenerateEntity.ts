@@ -9,7 +9,8 @@ const generateTableName = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())
+            || stringUtils.equalsIgnoreCase(systemSchema.mysql, dataBaseSummary.getSchemaName())) {
             continue;
         }
         codeArray.push(`export const ${getDataBaseName(dataBaseSummary)} = {`);
@@ -46,7 +47,8 @@ const generateInterfaceCode = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equalsIgnoreCase(systemSchema.informationSchema, dataBaseSummary.getSchemaName())
+            || stringUtils.equalsIgnoreCase(systemSchema.mysql, dataBaseSummary.getSchemaName())) {
             continue;
         }
         const tableList = dataBaseSummary.getTableList()

@@ -30,7 +30,8 @@ const generateMarkdownDoc = function (): JString {
     const dataBaseSummaryJList = mateDataService.getDataBaseSummaryList();
     for (let i = 0; i < dataBaseSummaryJList.size(); i++) {
         const dataBaseSummary = dataBaseSummaryJList.get(i);
-        if (stringUtils.equals(systemSchema.informationSchema, dataBaseSummary.getSchemaName())) {
+        if (stringUtils.equals(systemSchema.informationSchema, dataBaseSummary.getSchemaName())
+            || stringUtils.equalsIgnoreCase(systemSchema.mysql, dataBaseSummary.getSchemaName())) {
             continue;
         }
         const tableList = dataBaseSummary.getTableList()

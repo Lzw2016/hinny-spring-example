@@ -10,6 +10,7 @@ if (mateDataService.getDataBaseSummaryList().isEmpty()) {
 
 const systemSchema = {
     informationSchema: "information_schema",
+    mysql: "mysql",
 };
 
 /** 获取数据库名称 */
