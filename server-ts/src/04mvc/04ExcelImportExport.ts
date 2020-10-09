@@ -1,8 +1,9 @@
-import {jdbcDatabase} from "@hinny/data-jdbc";
+import {jdbcDatabase, mybatisJdbcDatabase} from "@hinny/data-jdbc";
 import {HttpRouter} from "@hinny/mvc";
 import {BuiltinFormats, ExcelDataType, excelUtils, IndexedColors} from "@hinny/core";
 
 const jdbc = jdbcDatabase.getDefault();
+const mybatis = mybatisJdbcDatabase.getDefault();
 
 // 定义导出实体
 interface ExcelEntity {
@@ -68,8 +69,34 @@ const t02: HttpRouter = {
     },
 }
 
+// Excel导出
+const t03: HttpRouter = {
+    get: ctx => {
+        const {request, response} = ctx;
+        const listData = mybatis.queryList<ExcelEntity>("mvc.04ExcelImportExport.t03", {
+            limit: request.getParameter("limit") ?? 60,
+        });
+        excelUtils.write({
+            request: request.originalRequest(),
+            response: response.originalResponse(),
+            fileName: "订单数据导出",
+            sheetName: "订单数据",
+            columns: {
+                orderCode: {column: "订单编号", columnWidth: 25},
+                shipName: {column: "收货人姓名", columnWidth: 15},
+                shipAddr: {column: "收货地址", columnWidth: 65},
+                shipMobile: {column: "手机号", columnWidth: 15},
+                payAmount: {column: "支付金额", columnWidth: 12, contentStyle: {dataFormat: BuiltinFormats.Fmt_7}},
+                freightAmount: {column: "运费", columnWidth: 10, contentStyle: {dataFormat: BuiltinFormats.Fmt_7}},
+                orderAmount: {column: "订单总额", columnWidth: 12, contentStyle: {dataFormat: BuiltinFormats.Fmt_8}, contentFontStyle: {color: IndexedColors.RED}},
+            },
+        }, listData);
+    }
+}
+
 export {
     t01,
     t02,
+    t03,
 }
 
