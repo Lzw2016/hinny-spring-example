@@ -2,6 +2,7 @@ import {jdbcDatabase, mybatisJdbcDatabase} from "@hinny/data-jdbc";
 import {HttpRouter} from "@hinny/mvc";
 import {BuiltinFormats, ExcelDataType, excelUtils, IndexedColors} from "@hinny/core";
 
+const log = LoggerFactory.getLogger(__filename);
 const jdbc = jdbcDatabase.getDefault();
 const mybatis = mybatisJdbcDatabase.getDefault();
 
@@ -76,6 +77,10 @@ const t03: HttpRouter = {
         const listData = mybatis.queryList<ExcelEntity>("mvc.04ExcelImportExport.t03", {
             limit: request.getParameter("limit") ?? 60,
         });
+        for (let i = 0; i < listData.size(); i++) {
+            const row = listData.get(i);
+            log.info("orderCode -> {}", row.orderCode);
+        }
         excelUtils.write({
             request: request.originalRequest(),
             response: response.originalResponse(),
