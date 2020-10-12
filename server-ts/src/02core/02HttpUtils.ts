@@ -16,11 +16,8 @@ const t01 = function () {
     log.info("res_1  -> {}", res_1);
 
     // 返回Map对象
-    const res_2 = httpUtils.getMap(url, {keyWord: "体温计"});
-    log.info("res_2 -> size={} | data={}", res_2.size(), res_2.get("data"));
-    // Map转JS对象
-    const jsRes = Interop.fromJMap<HttpRes>(res_2);
-    log.info("jsRes  -> size={} | {}", jsRes.data.size(), jsRes.data.get("prodNameList"));
+    const res_2 = httpUtils.getMap<HttpRes>(url, {keyWord: "体温计"});
+    log.info("res_2  -> size={} | {}", res_2.data.size(), res_2.data.get("prodNameList"));
 
     // 发送POST请求，设置body、params、headers
     const res_3 = httpUtils.postMap(

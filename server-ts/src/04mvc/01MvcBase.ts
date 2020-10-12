@@ -1,5 +1,5 @@
 import {HttpHandle, HttpRouter, MediaType} from "@hinny/mvc";
-import {cookieUtils, iDGenerateUtils} from "@hinny/core";
+import {cookieUtils, idGenerateUtils} from "@hinny/core";
 
 const log = LoggerFactory.getLogger(__filename);
 
@@ -41,8 +41,8 @@ const t03: HttpHandle = ctx => {
 // 设置HTTP响应数据
 const t04: HttpHandle = ctx => {
     const {response} = ctx;
-    response.addHeader("a-123", iDGenerateUtils.shortUuid());
-    cookieUtils.setCookieForRooPath(response.originalResponse(), "b-123", iDGenerateUtils.uuid());
+    response.addHeader("a-123", idGenerateUtils.shortUuid());
+    cookieUtils.setCookieForRooPath(response.originalResponse(), "b-123", idGenerateUtils.uuid());
     response.setContentType(MediaType.Plain);
     response.getWriter().println("111");
     response.getWriter().println("222");
