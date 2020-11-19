@@ -118,6 +118,7 @@ clever:
       interval: 1s
       include: [ '*.xml' ]
     multiple-jdbc:
+      disable: false
       default-name: default
       global-config:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -139,4 +140,18 @@ clever:
           #jdbc-url: jdbc:mysql://mysql.msvc.top:3306/clever-template
           username: clever-template
           password: lizhiwei1993
-
+    multiple-redis:
+      disable: false
+      default-name: default
+      global-config:
+        database: 0
+        port: 6379
+        lettuce:
+          pool:
+            max-active: 16
+            max-idle: 8
+            min-idle: 1
+      redis-map:
+        default:
+          host: redis5.msvc.top
+          password: lizhiwei1993
