@@ -3,6 +3,7 @@ package org.clever.hinny.example;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
 import java.util.TimeZone;
@@ -13,8 +14,11 @@ import java.util.TimeZone;
  */
 @Slf4j
 @SpringBootApplication(
-        scanBasePackages = {"org.clever"}
-        // exclude = {DataSourceAutoConfiguration.class}
+        scanBasePackages = {"org.clever"},
+        exclude = {
+                RedisAutoConfiguration.class,
+                // DataSourceAutoConfiguration.class
+        }
 )
 public class StartApp {
 

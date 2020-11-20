@@ -18,6 +18,8 @@ logging:
     com.zaxxer.hikari: info
     org.apache.ibatis: info
     org.hibernate.validator: warn
+    io.lettuce: warn
+    io.netty: warn
     springfox.documentation: warn
     schemacrawler: error
     us.fatehi: error
@@ -81,6 +83,18 @@ spring:
       minimum-idle: 1
       max-lifetime: 1800000
       connection-test-query: SELECT 1
+
+
+  freemarker:
+    request-context-attribute: req  #req访问request
+    suffix: .html  #后缀名
+    content-type: text/html
+    enabled: true
+    cache: false #缓存配置
+    template-loader-path: classpath:/templates/ #模板加载路径 按需配置
+    charset: UTF-8 #编码格式
+    settings:
+      number_format: '0.##'   #数字格式化，无小数点
 
 ###################################################################################
 ### clever
@@ -153,5 +167,8 @@ clever:
             min-idle: 1
       redis-map:
         default:
+          host: redis5.msvc.top
+          password: lizhiwei1993
+        redis2:
           host: redis5.msvc.top
           password: lizhiwei1993
