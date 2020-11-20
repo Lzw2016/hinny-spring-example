@@ -7,10 +7,10 @@
   resolved "https://registry.npmjs.org/@hinny/core/-/core-0.0.3.tgz#b6483b3b0c9e747d5376496d0c5178b570d73071"
   integrity sha512-H2bbXWenG6ceTO5rwh4riNFW2Qagr9pnEbigLleM6v+FE4OCCekex45rFbjWbpUb3Iiwxn2Qk6x0/Kel4IfLyQ==
 
-"@hinny/core@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npmjs.org/@hinny/core/-/core-0.0.8.tgz#0371ea2d580e749b194d2ae0f9b78c5982a6c0a6"
-  integrity sha512-AfZlbu7h/XAj3AygKIXevkJ7/ty6DAfYDPdnL/sUgU9cBHcQzQ4vxHVCM2gu506BBlBy5ShXltCHNWI66L/zZw==
+"@hinny/core@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.npm.taobao.org/@hinny/core/download/@hinny/core-0.0.10.tgz#f8e79d2cc18896d30d0faff2d665f3ced265c18a"
+  integrity sha1-+OedLMGIltMND6/y1mXzztJlwYo=
 
 "@hinny/data-jdbc@^0.0.3":
   version "0.0.3"
