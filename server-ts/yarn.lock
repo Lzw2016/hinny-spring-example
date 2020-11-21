@@ -17,6 +17,11 @@
   resolved "https://registry.npmjs.org/@hinny/data-jdbc/-/data-jdbc-0.0.3.tgz#b7ad48ca18a8c9b5093c0729629fa72266767458"
   integrity sha512-rBdPqxZGvQ5Lx1HNLLx8kd8BfwRTD31vf/jDwQrU6kH6vuJHMpQ1gQr6lzc6+krCPcZsLe4ZVre2nK0s2VTWig==
 
+"@hinny/data-redis@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.npm.taobao.org/@hinny/data-redis/download/@hinny/data-redis-0.0.2.tgz#89c18098cd94ec60019da28a46ff6b3efb944ca2"
+  integrity sha1-icGAmM2U7GABnaKKRv9rPvuUTKI=
+
 "@hinny/meta-data@^0.0.6":
   version "0.0.6"
   resolved "https://registry.npmjs.org/@hinny/meta-data/-/meta-data-0.0.6.tgz#9bb9da13439f8e596a8e5586c24f4551f6da279d"

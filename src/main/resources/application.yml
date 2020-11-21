@@ -169,6 +169,12 @@ clever:
         default:
           host: redis5.msvc.top
           password: lizhiwei1993
+          lettuce.pool:
+            min-idle: 2
+            max-active: 32
         redis2:
           host: redis5.msvc.top
           password: lizhiwei1993
+          lettuce.pool:
+            min-idle: 4
+            max-active: 64
