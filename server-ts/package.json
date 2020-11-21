@@ -10,6 +10,6 @@
     "@hinny/data-jdbc": "^0.0.3",
     "@hinny/meta-data": "^0.0.6",
     "@hinny/mvc": "^0.0.3",
-    "@hinny/data-redis": "^0.0.2"
+    "@hinny/data-redis": "^0.0.3"
   }
 }
