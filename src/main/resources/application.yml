@@ -125,6 +125,12 @@ clever:
       prefix-mappings:
         - request-path: '/!/'
           script-path: '/dist'
+      cors-config:
+        allowed-origins: [ '*' ]
+        allowed-methods: [ '*' ]
+        allowed-headers: [ '*' ]
+        exposed-headers: [ ]
+        allow-credentials: true
     mybatis-mapper-config:
       mapper-path: 'server-ts/src'
       #mapper-path: 'classpath:server-ts/src/**/*.xml'
