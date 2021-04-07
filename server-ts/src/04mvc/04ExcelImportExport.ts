@@ -75,7 +75,7 @@ const t03: HttpRouter = {
     get: ctx => {
         const {request, response} = ctx;
         const listData = mybatis.queryList<ExcelEntity>("mvc.04ExcelImportExport.t03", {
-            limit: request.getParameter("limit") ?? 60,
+            limit: request.getParameter("limit") ?? 120,
         });
         for (let i = 0; i < listData.size(); i++) {
             const row = listData.get(i);
