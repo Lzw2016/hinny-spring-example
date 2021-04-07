@@ -81,7 +81,7 @@ const t03: HttpRouter = {
             const row = listData.get(i);
             log.info("orderCode -> {}", row.orderCode);
         }
-        excelUtils.write({
+        const excelWriter = excelUtils.createWriter({
             request: request.originalRequest(),
             response: response.originalResponse(),
             fileName: "订单数据导出",
@@ -95,7 +95,9 @@ const t03: HttpRouter = {
                 freightAmount: {column: "运费", columnWidth: 10, contentStyle: {dataFormat: BuiltinFormats.Fmt_7}},
                 orderAmount: {column: "订单总额", columnWidth: 12, contentStyle: {dataFormat: BuiltinFormats.Fmt_8}, contentFontStyle: {color: IndexedColors.RED}},
             },
-        }, listData);
+        });
+        excelWriter.write(listData);
+        excelWriter.finish();
     }
 }
 
